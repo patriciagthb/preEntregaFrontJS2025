@@ -54,8 +54,9 @@ li {
     font-family: "Sorts Mill Goudy", serif;
     font-size: 18px;
 }
-nav>ul>li>a{
-    color: #12aee2;    
+
+nav>ul>li>a {
+    color: #12aee2;
 }
 
 /*Main (index.html)*/
@@ -104,7 +105,7 @@ footer {
 }
 
 /* Grid: Implementado en <section> en Productos, Accesorios, CyC, Juguetes, Ropa*/
-
+/* se comenta para adaptar al nuevo estilo
 .cards {
     display: grid;
     grid-template-columns: 1fr 2fr 2fr 1fr;
@@ -136,6 +137,15 @@ footer {
     grid-column: 3/4;
     grid-row: 2/3;
 }
+*/
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    background-color: #E6F7FF;
+    padding: 20px;
+}
 
 .cards img {
     width: 300px;
@@ -161,6 +171,19 @@ footer {
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    flex: 1 1 250px;
+    max-width: 350px;
+    padding: 15px;
+    border: 1px solid #cceeff;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.cards article img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    border-radius: 20px;
 }
 
 /*Formulario de Contacto*/
@@ -248,7 +271,7 @@ iframe {
 }
 
 /*Media Queries Cards productos*/
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     section {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, 1fr);
@@ -273,7 +296,8 @@ iframe {
         grid-column: 1/2;
         grid-row: 4/5;
     }
-
+        */
+@media (max-width: 480px) {
     nav>ul {
         flex-direction: column;
         align-items: center;
@@ -282,6 +306,4 @@ iframe {
         margin-top: 0px;
         margin-bottom: 0px;
     }
-
-
 }
