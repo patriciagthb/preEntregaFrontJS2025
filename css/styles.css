@@ -37,6 +37,19 @@ header h5 {
     font-size: 30px;
 }
 
+#contador {
+    color: #12aee2;
+    font-weight: bold;
+    margin-left: auto;
+    font-family: "Sorts Mill Goudy", serif;
+    font-size: 18px;
+    border: 2px solid #12aee2;
+    padding: 5px 10px;
+    background-color: white;
+    border-radius: 8px;
+   
+}
+
 
 /*Nav*/
 
