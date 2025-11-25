@@ -3,52 +3,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const contadorCarrito = document.getElementById('contador');
 
     function actualizarContador() {
-        if (contadorCarrito){
-        const carrito = obtenerCarrito();
-        contadorCarrito.textContent = `Carrito (${carrito.length})`;
+        if (contadorCarrito) {
+            const carrito = obtenerCarrito();
+            contadorCarrito.textContent = `Carrito (${carrito.length})`;
+        }
     }
-}
 
 
-    
-actualizarContador();
+
+    actualizarContador();
 
 
-//Se llama a la Api dummyJson para traer comentarios y nombres
+    //Se llama a la Api dummyJson para traer comentarios y nombres
 
-const reseniasUrl = 'https://dummyjson.com/comments';
+    const reseniasUrl = 'https://dummyjson.com/comments';
 
-fetch(reseniasUrl)
-    .then(response => response.json())
-    .then(data => {
-        const comentarios = data.comments;
-        const contenedorResenias = document.querySelector(".resenias");
+    fetch(reseniasUrl)
+        .then(response => response.json())
+        .then(data => {
+            const comentarios = data.comments;
+            const contenedorResenias = document.querySelector(".resenias");
 
-        comentarios.forEach(resenia => {
-            const nuevoComentario = document.createElement('article');
-            nuevoComentario.innerHTML = `
+            if (contenedorResenias) {
+                comentarios.forEach(resenia => {
+                    const nuevoComentario = document.createElement('article');
+                    nuevoComentario.innerHTML = `
 
         <p>"${resenia.body}"</p>
         <p>${resenia.user.fullName}</p>
         </article>
         `;
-            contenedorResenias.appendChild(nuevoComentario);
-        });
-    })
-    .catch(error => console.log(error));
+                    contenedorResenias.appendChild(nuevoComentario);
+                });
+            }
+        })
+        .catch(error => console.log(error));
 
-// Llamar a la Api mockapi para traer los productos
+    // Llamar a la Api mockapi para traer los productos
 
-const productosUrl = 'https://69210338512fb4140bdf2380.mockapi.io/api/productos'
-fetch(productosUrl)
-    .then(response => response.json())
-    .then(data => {
-        const contenedorProductos = document.querySelector(".cards");
+    const productosUrl = 'https://69210338512fb4140bdf2380.mockapi.io/api/productos'
+    fetch(productosUrl)
+        .then(response => response.json())
+        .then(data => {
+            const contenedorProductos = document.querySelector(".cards");
 
-        if (contenedorProductos){
-        data.forEach(prod => {
-            const nuevoProducto = document.createElement('article');
-            nuevoProducto.innerHTML = `
+            if (contenedorProductos) {
+                data.forEach(prod => {
+                    const nuevoProducto = document.createElement('article');
+                    nuevoProducto.innerHTML = `
             <img src="${prod.imagen}">
             <div class="descripcioncards">
             <p>${prod.nombreProducto}</p>
@@ -57,45 +59,45 @@ fetch(productosUrl)
             style="color: #74C0FC;"></i></button>
             </div>
             `;
-            contenedorProductos.appendChild(nuevoProducto);
-        });
-        cargarEventoABotones();
+                    contenedorProductos.appendChild(nuevoProducto);
+                });
+                cargarEventoABotones();
+            }
+        })
+        .catch(error => console.log(error));
+
+
+    // Obtener carrito actual
+    function obtenerCarrito() {
+        return JSON.parse(localStorage.getItem('carrito')) || [];
     }
-    })
-    .catch(error => console.log(error));
+
+    //Guardar carrito en el storage
+    function guardarCarrito(carrito) {
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
 
 
-// Obtener carrito actual
-function obtenerCarrito() {
-    return JSON.parse(localStorage.getItem('carrito')) || [];
-}
-
-//Guardar carrito en el storage
-function guardarCarrito(carrito) {
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-}
-
-
-// Agregar productos al carrito
-function agregarProductosalCarrito(id) {
-    let carrito = obtenerCarrito();
-    carrito.push(id);
-    guardarCarrito(carrito);
-    alert("Producto agregado al carrito");
-    actualizarContador();
-}
+    // Agregar productos al carrito
+    function agregarProductosalCarrito(id) {
+        let carrito = obtenerCarrito();
+        carrito.push(id);
+        guardarCarrito(carrito);
+        alert("Producto agregado al carrito");
+        actualizarContador();
+    }
 
 
-// añadir evento a los botones
-function cargarEventoABotones() {
-    const botones = document.querySelectorAll('.cards button');
-    botones.forEach(boton => {
-        boton.addEventListener('click', () => {
-            const productoId = boton.getAttribute('data-id');
-            agregarProductosalCarrito(productoId);
+    // añadir evento a los botones
+    function cargarEventoABotones() {
+        const botones = document.querySelectorAll('.cards button');
+        botones.forEach(boton => {
+            boton.addEventListener('click', () => {
+                const productoId = boton.getAttribute('data-id');
+                agregarProductosalCarrito(productoId);
+            });
         });
-    });
-}
+    }
 });
 
 
