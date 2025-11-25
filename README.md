@@ -7,7 +7,7 @@ Las fuentes son de Googlefonts y las imágenes de las hojas 'Productos', 'Acceso
 
 La hoja 'resenias.html' consume la API dummyjson para mostrar comentarios y nombre completo.
 
-La hoja 'tienda.html utiliza la api mockapi para traer los datos de cada card (imagen, precio, nombre de producto). Las imagenes se cargaron en github, se configuró mockapi para que cargue la url de la imagen desde allí.
+La hoja 'tienda.html utiliza la api mockapi para traer los datos de cada card (imagen, precio, nombre de producto). Las imagenes se cargaron en Imgur, se configuró mockapi para que cargue la url de la imagen desde allí.
 
 
 
